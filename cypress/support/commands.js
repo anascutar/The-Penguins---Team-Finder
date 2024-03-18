@@ -23,3 +23,39 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add("login", () => {
+  cy.visit("https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/");
+  cy.get("#eMailAdress").type("anamariascutar@gmail.com");
+  cy.get("#password").type("password123");
+  cy.get(".Button_button__JBBzO").click();
+
+  cy.url().should(
+    "include",
+    "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/"
+  );
+});
+
+Cypress.Commands.add("TeamRoles", () => {
+  cy.get('[href="/team-roles"]').click();
+  cy.wait(2000);
+  cy.url().should(
+    "eq",
+    "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/team-roles"
+  );
+});
+Cypress.Commands.add("Departments", () => {
+  cy.get('[href="/departments/admin/all"]').click();
+  cy.wait(2000);
+  cy.url().should(
+    "eq",
+    "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/departments/admin/all"
+  );
+});
+Cypress.Commands.add("Employees", () => {
+  cy.get('[href="/employees/all"]').click();
+  cy.wait(2000);
+  cy.url().should(
+    "eq",
+    "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/employees/all"
+  );
+});
