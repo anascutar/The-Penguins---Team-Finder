@@ -3,13 +3,10 @@ export default class POM {
     return input.invoke("val").then((text) => expect(text).to.equal(name));
   }
 
-  numberVerification(name, input) {
-    return input.invoke("val").then((text) => {
-      expect(text).to.equal(name);
-    });
-  }
-
   buttonVerification(name, button) {
     return button.invoke("text").then((text) => expect(text).to.equal(name));
+  }
+  titleVerification(name, anchor) {
+    return anchor.should("have.text", name);
   }
 }

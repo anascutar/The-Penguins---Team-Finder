@@ -11,30 +11,30 @@ describe("Admin Team Roles", () => {
     cy.TeamRoles();
   });
 
-  it("Verify if the user can delete a team role", () => {
-    cy.get(
-      ':nth-child(3) > :nth-child(4) > .MuiButtonBase-root > [data-testid="DeleteForeverIcon"]'
-    ).click();
-    cy.wait(2000);
+  it("Verify if the user can add a new team role", () => {
+    navbar.buttonVerification("Add role", cy.get(".Button_button__JBBzO"));
+    cy.get(".Button_button__JBBzO")
+      .scrollIntoView()
+      .should("be.visible")
+      .click();
+    cy.wait(1000);
+    cy.get("#parent-modal-title")
+      .should("be.visible")
+      .should("have.text", "Add new role");
 
-    navbar.buttonVerification(
-      "Delete",
+    cy.get("#teamRoleName").type("Gaming Developer");
+    teamroles.inputVerification("Gaming Developer", cy.get("#teamRoleName"));
+
+    teamroles.buttonVerification(
+      "Confirm",
       cy.get(".Modal_modalButtons__fNdfv > :nth-child(2)")
     );
     cy.get(".Modal_modalButtons__fNdfv > :nth-child(2)").click();
-  });
 
-  it("Verify if the user can cancel deleting a team role", () => {
-    cy.get(
-      ':nth-child(3) > :nth-child(4) > .MuiButtonBase-root > [data-testid="DeleteForeverIcon"] > path'
-    ).click();
-    cy.wait(2000);
-
-    navbar.buttonVerification(
-      "Cancel",
-      cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)")
+    cy.url().should(
+      "eq",
+      "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/team-roles"
     );
-    cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)").click();
   });
 
   it("Verify if the user can edit a team role", () => {
@@ -43,12 +43,21 @@ describe("Admin Team Roles", () => {
 
     cy.get("#teamRoleName").click();
     cy.get("#teamRoleName").clear().type("Engineer QA");
+
+    cy.wait(1000);
+    cy.get("#parent-modal-title")
+      .should("be.visible")
+      .should("have.text", "Update");
     teamroles.inputVerification("Engineer QA", cy.get("#teamRoleName"));
     navbar.buttonVerification(
       "Confirm",
       cy.get(".Modal_modalButtons__fNdfv > :nth-child(2)")
     );
     cy.get(".Modal_modalButtons__fNdfv > :nth-child(2)").click();
+    cy.url().should(
+      "eq",
+      "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/team-roles"
+    );
   });
 
   it("Verify if the user can cancel editing a team role", () => {
@@ -57,12 +66,20 @@ describe("Admin Team Roles", () => {
 
     cy.get("#teamRoleName").click();
     cy.get("#teamRoleName").clear().type("Engineer QA");
+    cy.wait(1000);
+    cy.get("#parent-modal-title")
+      .should("be.visible")
+      .should("have.text", "Update");
     teamroles.inputVerification("Engineer QA", cy.get("#teamRoleName"));
     navbar.buttonVerification(
       "Cancel",
       cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)")
     );
     cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)").click();
+    cy.url().should(
+      "eq",
+      "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/team-roles"
+    );
   });
 
   it("Verify if the user can order the team roles", () => {
@@ -75,33 +92,57 @@ describe("Admin Team Roles", () => {
       .scrollIntoView()
       .should("be.visible")
       .click();
-    cy.wait(2000);
-
-    cy.get("#teamRoleName").type("DevOps Engineer");
-    teamroles.inputVerification("DevOps Engineer", cy.get("#teamRoleName"));
+    cy.wait(1000);
+    cy.get("#parent-modal-title")
+      .should("be.visible")
+      .should("have.text", "Add new role");
 
     teamroles.buttonVerification(
       "Cancel",
       cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)")
     );
     cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)").click();
+    cy.url().should(
+      "eq",
+      "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/team-roles"
+    );
   });
 
-  it("Verify if the user can add a new team role", () => {
-    navbar.buttonVerification("Add role", cy.get(".Button_button__JBBzO"));
-    cy.get(".Button_button__JBBzO")
-      .scrollIntoView()
+  it("Verify if the user can cancel deleting a team role", () => {
+    cy.get(
+      ':nth-child(3) > :nth-child(4) > .MuiButtonBase-root > [data-testid="DeleteForeverIcon"] > path'
+    ).click();
+    cy.get("#parent-modal-title")
       .should("be.visible")
-      .click();
-    cy.wait(1000);
+      .should("have.text", "Delete");
 
-    cy.get("#teamRoleName").type("Gaming Developer");
-    teamroles.inputVerification("Gaming Developer", cy.get("#teamRoleName"));
+    navbar.buttonVerification(
+      "Cancel",
+      cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)")
+    );
+    cy.get(".Modal_modalButtons__fNdfv > :nth-child(1)").click();
+    cy.url().should(
+      "eq",
+      "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/team-roles"
+    );
+  });
 
-    teamroles.buttonVerification(
-      "Confirm",
+  it("Verify if the user can delete a team role", () => {
+    cy.get(
+      ':nth-child(3) > :nth-child(4) > .MuiButtonBase-root > [data-testid="DeleteForeverIcon"]'
+    ).click();
+    cy.get("#parent-modal-title")
+      .should("be.visible")
+      .should("have.text", "Delete");
+
+    navbar.buttonVerification(
+      "Delete",
       cy.get(".Modal_modalButtons__fNdfv > :nth-child(2)")
     );
     cy.get(".Modal_modalButtons__fNdfv > :nth-child(2)").click();
+    cy.url().should(
+      "eq",
+      "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/team-roles"
+    );
   });
 });
