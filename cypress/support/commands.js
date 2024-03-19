@@ -59,3 +59,15 @@ Cypress.Commands.add("Employees", () => {
     "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/employees/all"
   );
 });
+
+//   
+Cypress.Commands.add("Invitations", () => {
+  cy.get('[href="/employees/all"]').click();
+  cy.wait(2000);
+  cy.url().should(
+    "eq",
+    "https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/employees/all"
+  );
+  cy.get('[href="/employees/invitations"]').click();
+  cy.url().should("eq","https://atc-2024-thepenguins-fe-linux-web-app.azurewebsites.net/employees/invitations")
+});

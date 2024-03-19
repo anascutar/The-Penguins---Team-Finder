@@ -1,6 +1,6 @@
 import POM from "./POM";
 const employees = new POM();
-describe("Admin Team Roles", () => {
+describe("Admin Employees", () => {
   beforeEach("Login", () => {
     cy.login();
     cy.Employees();
@@ -19,9 +19,8 @@ describe("Admin Team Roles", () => {
     );
     cy.get("#react-select-2-option-1").click();
 
-    //     cy.wait(1000);
-    //     cy.get("#departmentName").type("Front-End");
-    //     departments.inputVerification("Front-End", cy.get("#departmentName"));
+    cy.get("#departmentName").type("Front-End");
+    departments.inputVerification("Front-End", cy.get("#departmentName"));
     employees.buttonVerification(
       "Confirm",
       cy.get(".Modal_modalButtons__fNdfv > :nth-child(2)")
